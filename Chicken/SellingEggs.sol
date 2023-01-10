@@ -54,14 +54,13 @@ contract SellingEgg{
         require(tokenPrices[_tokenId]<=msg.value);
 
         //이더를 전송
-        payable(owner).transfer(msg.value);
+        payable(msg.sender).transfer(owner,tokenPrices[_tokenId]);
+        //transferFrom(msg.sender,owner,tokenPrices[_tokenId]);
 
         //NFT 주인 변경
-        Token.transferFrom(owner,msg.sender,_tokenId);
+        Token.changeOwner(msg.sender);
 
         //판매 가격 삭제
         tokenPrices[_tokenId]=0;
     }
 }
-
-rmfjs TLtm 
