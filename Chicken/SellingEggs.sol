@@ -54,11 +54,13 @@ contract SellingEgg{
         require(tokenPrices[_tokenId]<=msg.value);
 
         //이더를 전송
-        payable(msg.sender).transfer(owner,tokenPrices[_tokenId]);
+        //send(owner,tokenPrices[_tokenId]);
+        payable(owner).transfer(tokenPrices[_tokenId]);
         //transferFrom(msg.sender,owner,tokenPrices[_tokenId]);
 
         //NFT 주인 변경
-        Token.changeOwner(msg.sender);
+        //Token.changeOwner(msg.sender);
+        Token.transferOwnership(msg.sender);
 
         //판매 가격 삭제
         tokenPrices[_tokenId]=0;
